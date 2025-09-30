@@ -150,6 +150,45 @@ class Store {
     this.saveData(data);
   }
 
+  // Export all data (for backup)
+  exportData(): string {
+    const data = this.getData();
+    return JSON.stringify(data, null, 2);
+  }
+
+  // Import data (for restore)
+  importData(jsonData: string): boolean {
+    try {
+      const data = JSON.parse(jsonData);
+      // Validate data structure
+      if (data.products && data.cart && data.orders && data.admin && data.socialMedia) {
+        this.saveData(data);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Error importing data:', error);
+      return false;
+    }
+  }
+
+  // Clear all data (reset to defaults)
+  clearAllData() {
+    localStorage.removeItem(this.storageKey);
+  }
+
+  // Get data size info
+  getDataInfo() {
+    const data = this.getData();
+    return {
+      productsCount: data.products.length,
+      ordersCount: data.orders.length,
+      cartItemsCount: data.cart.length,
+      socialMediaCount: data.socialMedia.length,
+      lastModified: new Date().toLocaleString('uk-UA')
+    };
+  }
+
   // Statistics
   getStatistics() {
     const data = this.getData();

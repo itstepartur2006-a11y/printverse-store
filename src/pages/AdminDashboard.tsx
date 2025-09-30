@@ -124,7 +124,7 @@ export default function AdminDashboard() {
 
       <div className="container mx-auto px-4 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="overview">
               Огляд
             </TabsTrigger>
@@ -136,6 +136,9 @@ export default function AdminDashboard() {
             </TabsTrigger>
             <TabsTrigger value="social">
               Соціальні мережі
+            </TabsTrigger>
+            <TabsTrigger value="data">
+              Дані
             </TabsTrigger>
             <TabsTrigger value="statistics">
               {t('statistics')}
@@ -459,6 +462,116 @@ export default function AdminDashboard() {
                   </Card>
                 ))}
               </div>
+            </div>
+          </TabsContent>
+
+          {/* Data Management Tab */}
+          <TabsContent value="data">
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold">Управління даними</h2>
+              
+              {/* Data Info */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Інформація про дані</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <p><strong>Товари:</strong> {store.getDataInfo().productsCount}</p>
+                      <p><strong>Замовлення:</strong> {store.getDataInfo().ordersCount}</p>
+                    </div>
+                    <div>
+                      <p><strong>Соціальні мережі:</strong> {store.getDataInfo().socialMediaCount}</p>
+                      <p><strong>Останнє оновлення:</strong> {store.getDataInfo().lastModified}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Export Data */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Експорт даних</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Експортуйте всі дані для резервного копіювання перед оновленням коду.
+                  </p>
+                  <Button 
+                    onClick={() => {
+                      const data = store.exportData();
+                      const blob = new Blob([data], { type: 'application/json' });
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = `printverse-backup-${new Date().toISOString().split('T')[0]}.json`;
+                      a.click();
+                      URL.revokeObjectURL(url);
+                      toast.success('Дані експортовано успішно!');
+                    }}
+                  >
+                    📥 Експортувати дані
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Import Data */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Імпорт даних</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Відновіть дані з резервної копії.
+                  </p>
+                  <input
+                    type="file"
+                    accept=".json"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                          const data = event.target?.result as string;
+                          if (store.importData(data)) {
+                            toast.success('Дані імпортовано успішно!');
+                            window.location.reload();
+                          } else {
+                            toast.error('Помилка при імпорті даних!');
+                          }
+                        };
+                        reader.readAsText(file);
+                      }
+                    }}
+                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-black file:text-white hover:file:bg-gray-800"
+                  />
+                </CardContent>
+              </Card>
+
+              {/* Clear Data */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Очистити дані</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-red-600 mb-4">
+                    ⚠️ Увага! Це дія видалить всі дані і поверне до початкових налаштувань.
+                  </p>
+                  <Button 
+                    variant="destructive"
+                    onClick={() => {
+                      if (confirm('Ви впевнені, що хочете видалити всі дані?')) {
+                        store.clearAllData();
+                        toast.success('Дані очищено!');
+                        window.location.reload();
+                      }
+                    }}
+                  >
+                    🗑️ Очистити всі дані
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
 
