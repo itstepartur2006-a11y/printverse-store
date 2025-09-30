@@ -1,19 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Truck, Shield, Headphones } from 'lucide-react';
+import { ArrowRight, Truck, Shield, Headphones } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ProductCard } from '@/components/ProductCard';
 import { useLanguage } from '@/components/LanguageProvider';
-import { store } from '@/lib/store';
 
 export default function Index() {
   const { t } = useLanguage();
-  const products = store.getProducts();
-  
-  const newProducts = products.filter(p => p.isNew).slice(0, 3);
-  const popularProducts = products.filter(p => p.isPopular).slice(0, 3);
-  const promotionProducts = products.filter(p => p.isPromotion).slice(0, 3);
 
   const features = [
     {
@@ -75,83 +68,17 @@ export default function Index() {
         </div>
       </section>
 
-      {/* New Products Section */}
-      {newProducts.length > 0 && (
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold text-black">{t('newProducts')}</h2>
-              <Link to="/catalog?filter=new">
-                <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white">
-                  {t('viewAll')} <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              {newProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Popular Products Section */}
-      {popularProducts.length > 0 && (
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-800">{t('popularProducts')}</h2>
-              <Link to="/catalog?filter=popular">
-                <Button variant="outline">
-                  {t('viewAll')} <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              {popularProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Promotions Section */}
-      {promotionProducts.length > 0 && (
-        <section className="py-16 bg-red-50">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-800 flex items-center">
-                <Star className="w-8 h-8 text-red-500 mr-2" />
-                {t('promotions')}
-              </h2>
-              <Link to="/catalog?filter=promotion">
-                <Button variant="outline">
-                  {t('viewAll')} <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              {promotionProducts.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-20 bg-gray-100">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6">
+          <h2 className="text-4xl font-bold mb-6 text-black">
             Готові замовити?
           </h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-xl mb-8 text-gray-600">
             Перегляньте наш каталог і виберіть ідеальний брелок для себе!
           </p>
           <Link to="/catalog">
-            <Button size="lg" variant="secondary">
+            <Button size="lg" className="bg-black hover:bg-gray-800 text-white">
               {t('catalog')} <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
