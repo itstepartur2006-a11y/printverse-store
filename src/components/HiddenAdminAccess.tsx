@@ -63,7 +63,7 @@ export const HiddenAdminAccess: React.FC<HiddenAdminAccessProps> = ({ children }
         <div className="fixed top-4 right-4 z-50">
           <button
             onClick={handleAdminAccess}
-            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-lg transition-colors text-sm font-medium"
+            className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg transition-colors text-sm font-medium"
           >
             🔐 Admin Access
           </button>

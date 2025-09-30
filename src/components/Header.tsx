@@ -45,14 +45,14 @@ export const Header: React.FC = () => {
             className="flex items-center space-x-3"
             onClick={handleLogoPress}
           >
-            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-200 shadow-sm">
+            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-black">
               <img 
                 src="/logo.jpg" 
                 alt="PRINTVERSE" 
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-xl font-bold text-gray-800">PRINTVERSE</span>
+            <span className="text-xl font-bold text-black">PRINTVERSE</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -61,8 +61,8 @@ export const Header: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-gray-600 hover:text-blue-600 transition-colors ${
-                  location.pathname === item.path ? 'text-blue-600 font-semibold' : ''
+                className={`text-gray-600 hover:text-black transition-colors ${
+                  location.pathname === item.path ? 'text-black font-semibold' : ''
                 }`}
               >
                 {item.label}
@@ -74,11 +74,11 @@ export const Header: React.FC = () => {
           <div className="flex items-center space-x-4">
             {/* Cart */}
             <Link to="/cart">
-              <Button variant="outline" size="sm" className="relative">
+              <Button variant="outline" size="sm" className="relative border-black text-black hover:bg-black hover:text-white">
                 <ShoppingCart className="w-4 h-4 mr-2" />
                 {t('cart')}
                 {cartItemsCount > 0 && (
-                  <Badge className="absolute -top-2 -right-2 bg-red-500 text-white text-xs">
+                  <Badge className="absolute -top-2 -right-2 bg-black text-white text-xs">
                     {cartItemsCount}
                   </Badge>
                 )}
@@ -88,7 +88,7 @@ export const Header: React.FC = () => {
             {/* Mobile Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="md:hidden">
+                <Button variant="outline" size="sm" className="md:hidden border-black text-black hover:bg-black hover:text-white">
                   <Menu className="w-4 h-4" />
                 </Button>
               </DropdownMenuTrigger>

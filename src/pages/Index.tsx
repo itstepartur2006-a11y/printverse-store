@@ -17,17 +17,17 @@ export default function Index() {
 
   const features = [
     {
-      icon: <Truck className="w-8 h-8 text-blue-600" />,
+      icon: <Truck className="w-8 h-8 text-black" />,
       title: 'Швидка доставка',
       description: 'Доставка по всій Україні за 1-3 дні'
     },
     {
-      icon: <Shield className="w-8 h-8 text-blue-600" />,
+      icon: <Shield className="w-8 h-8 text-black" />,
       title: 'Якісні матеріали',
       description: 'Використовуємо тільки високоякісні пластики'
     },
     {
-      icon: <Headphones className="w-8 h-8 text-blue-600" />,
+      icon: <Headphones className="w-8 h-8 text-black" />,
       title: 'Підтримка 24/7',
       description: 'Завжди готові допомогти з вашими питаннями'
     }
@@ -36,16 +36,16 @@ export default function Index() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 py-20">
+      <section className="bg-gray-50 py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold text-gray-800 mb-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <h1 className="text-5xl font-bold text-black mb-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
             {t('welcome')}
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto animate-in fade-in delay-300 duration-700">
             {t('subtitle')}
           </p>
           <Link to="/catalog">
-            <Button size="lg" className="animate-in fade-in delay-500 duration-700">
+            <Button size="lg" className="animate-in fade-in delay-500 duration-700 bg-black hover:bg-gray-800 text-white">
               {t('viewAll')} <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
@@ -57,12 +57,12 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="text-center p-6 hover:shadow-lg transition-shadow">
+              <Card key={index} className="text-center p-6 hover:shadow-lg transition-shadow border border-gray-200">
                 <CardContent className="pt-6">
                   <div className="flex justify-center mb-4">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">
+                  <h3 className="text-xl font-semibold mb-2 text-black">
                     {feature.title}
                   </h3>
                   <p className="text-gray-600">
@@ -80,9 +80,9 @@ export default function Index() {
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-800">{t('newProducts')}</h2>
+              <h2 className="text-3xl font-bold text-black">{t('newProducts')}</h2>
               <Link to="/catalog?filter=new">
-                <Button variant="outline">
+                <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white">
                   {t('viewAll')} <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
