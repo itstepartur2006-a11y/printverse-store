@@ -58,6 +58,16 @@ export default function AdminDashboard() {
 
   const loadData = () => {
     try {
+      // Test if store is working
+      const testData = store.getData();
+      if (!testData) {
+        console.error('Store data is null');
+        setProducts([]);
+        setOrders([]);
+        setSocialMedia([]);
+        return;
+      }
+
       setProducts(store.getProducts());
       setOrders(store.getOrders());
       setSocialMedia(store.getSocialMedia());

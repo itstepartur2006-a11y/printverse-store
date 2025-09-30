@@ -18,8 +18,8 @@ interface StoreData {
 class Store {
   private storageKey = '3d-keychain-store';
 
-  // Get data from localStorage
-  private getData(): StoreData {
+  // Get data from localStorage (public for testing)
+  getData(): StoreData {
     try {
       const data = localStorage.getItem(this.storageKey);
       if (!data) {

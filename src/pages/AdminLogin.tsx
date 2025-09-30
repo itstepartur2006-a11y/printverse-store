@@ -14,16 +14,18 @@ export default function AdminLogin() {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
 
-  // Update admin credentials on component mount
-  React.useEffect(() => {
-    store.updateAdminCredentials();
-  }, []);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
+      // Ensure store is working
+      const admin = store.getAdmin();
+      if (!admin) {
+        toast.error('Помилка ініціалізації');
+        return;
+      }
+
       if (store.validateAdmin(credentials.username, credentials.password)) {
         localStorage.setItem('adminLoggedIn', 'true');
         localStorage.setItem('adminSession', 'verified');
@@ -33,6 +35,7 @@ export default function AdminLogin() {
         toast.error(language === 'uk' ? 'Невірні дані для входу' : 'Invalid credentials');
       }
     } catch (error) {
+      console.error('Login error:', error);
       toast.error(language === 'uk' ? 'Помилка входу' : 'Login error');
     } finally {
       setIsLoading(false);
