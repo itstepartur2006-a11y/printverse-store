@@ -11,12 +11,22 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from './LanguageProvider';
 import { store } from '@/lib/store';
+import { useAdminAccess } from './HiddenAdminAccess';
 
 export const Header: React.FC = () => {
   const { t } = useLanguage();
   const location = useLocation();
   const cartItems = store.getCart();
   const cartItemsCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  
+  // Получаем функцию для мобильного доступа к админке
+  let handleLogoPress: (() => void) | undefined;
+  try {
+    const adminAccess = useAdminAccess();
+    handleLogoPress = adminAccess.handleLogoPress;
+  } catch {
+    // Контекст недоступен, это нормально
+  }
 
   const navItems = [
     { path: '/', label: t('home') },
@@ -30,7 +40,11 @@ export const Header: React.FC = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link 
+            to="/" 
+            className="flex items-center space-x-3"
+            onClick={handleLogoPress}
+          >
             <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-200 shadow-sm">
               <img 
                 src="/logo.jpg" 

@@ -1,5 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+// Контекст для передачи функции доступа к админке
+const AdminAccessContext = createContext<{
+  handleLogoPress: () => void;
+} | null>(null);
+
+export const useAdminAccess = () => {
+  const context = useContext(AdminAccessContext);
+  if (!context) {
+    throw new Error('useAdminAccess must be used within HiddenAdminAccess');
+  }
+  return context;
+};
 
 interface HiddenAdminAccessProps {
   children: React.ReactNode;
@@ -7,6 +20,7 @@ interface HiddenAdminAccessProps {
 
 export const HiddenAdminAccess: React.FC<HiddenAdminAccessProps> = ({ children }) => {
   const [showAccess, setShowAccess] = useState(false);
+  const [logoPressCount, setLogoPressCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,8 +41,23 @@ export const HiddenAdminAccess: React.FC<HiddenAdminAccessProps> = ({ children }
     navigate('/admin');
   };
 
+  // Функция для мобильного доступа через логотип
+  const handleLogoPress = () => {
+    setLogoPressCount(prev => {
+      const newCount = prev + 1;
+      if (newCount >= 5) {
+        setShowAccess(true);
+        setTimeout(() => setShowAccess(false), 5000);
+        return 0; // Сброс счетчика
+      }
+      // Сброс счетчика через 3 секунды
+      setTimeout(() => setLogoPressCount(0), 3000);
+      return newCount;
+    });
+  };
+
   return (
-    <>
+    <AdminAccessContext.Provider value={{ handleLogoPress }}>
       {children}
       {showAccess && (
         <div className="fixed top-4 right-4 z-50">
@@ -40,6 +69,6 @@ export const HiddenAdminAccess: React.FC<HiddenAdminAccessProps> = ({ children }
           </button>
         </div>
       )}
-    </>
+    </AdminAccessContext.Provider>
   );
 };
