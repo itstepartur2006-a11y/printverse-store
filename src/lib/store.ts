@@ -21,17 +21,21 @@ class Store {
   // Get data from localStorage
   private getData(): StoreData {
     const data = localStorage.getItem(this.storageKey);
-    return data ? JSON.parse(data) : {
-      products: mockProducts,
-      cart: [],
-      orders: [],
-      admin: { username: 'PrintVerse2025', password: 'Sviderskyi100' },
-      socialMedia: [
-        { id: '1', name: 'Facebook', url: 'https://facebook.com/printverse' },
-        { id: '2', name: 'Instagram', url: 'https://instagram.com/printverse' },
-        { id: '3', name: 'Telegram', url: 'https://t.me/printverse' }
-      ]
-    };
+    if (!data) {
+      // If no data exists, restore default data
+      this.restoreDefaultData();
+      return this.getData(); // Recursive call to get the restored data
+    }
+    
+    const parsedData = JSON.parse(data);
+    
+    // Check if products array is empty and restore if needed
+    if (!parsedData.products || parsedData.products.length === 0) {
+      this.restoreDefaultData();
+      return this.getData(); // Recursive call to get the restored data
+    }
+    
+    return parsedData;
   }
 
   // Save data to localStorage
@@ -143,11 +147,33 @@ class Store {
     return admin.username === username && admin.password === password;
   }
 
-  // Update admin credentials (for migration)
-  updateAdminCredentials() {
+  // Force restore default data (if localStorage is empty)
+  restoreDefaultData() {
     const data = this.getData();
-    data.admin = { username: 'PrintVerse2025', password: 'Sviderskyi100' };
-    this.saveData(data);
+    if (data.products.length === 0) {
+      const defaultData = {
+        products: mockProducts,
+        cart: [],
+        orders: [],
+        admin: { username: 'PrintVerse2025', password: 'Sviderskyi100' },
+        socialMedia: [
+          { id: '1', name: 'Facebook', url: 'https://facebook.com/printverse' },
+          { id: '2', name: 'Instagram', url: 'https://instagram.com/printverse' },
+          { id: '3', name: 'Telegram', url: 'https://t.me/printverse' }
+        ]
+      };
+      this.saveData(defaultData);
+      return true;
+    }
+    return false;
+  }
+
+  // Check if data exists and restore if needed
+  ensureDataExists() {
+    const data = localStorage.getItem(this.storageKey);
+    if (!data) {
+      this.restoreDefaultData();
+    }
   }
 
   // Export all data (for backup)

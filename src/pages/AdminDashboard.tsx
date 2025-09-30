@@ -549,6 +549,30 @@ export default function AdminDashboard() {
                 </CardContent>
               </Card>
 
+              {/* Restore Products */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Відновити товари</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    Відновити базові товари, якщо вони зникли.
+                  </p>
+                  <Button 
+                    onClick={() => {
+                      if (store.restoreDefaultData()) {
+                        toast.success('Товари відновлено!');
+                        window.location.reload();
+                      } else {
+                        toast.info('Товари вже існують');
+                      }
+                    }}
+                  >
+                    🔄 Відновити товари
+                  </Button>
+                </CardContent>
+              </Card>
+
               {/* Clear Data */}
               <Card>
                 <CardHeader>

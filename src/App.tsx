@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from '@/components/LanguageProvider';
 import { Header } from '@/components/Header';
 import { HiddenAdminAccess } from '@/components/HiddenAdminAccess';
+import { store } from '@/lib/store';
 import Index from './pages/Index';
 import ProductCatalog from './pages/ProductCatalog';
 import ProductDetail from './pages/ProductDetail';
@@ -17,6 +18,9 @@ import AdminDashboard from './pages/AdminDashboard';
 import NotFound from './pages/NotFound';
 
 const queryClient = new QueryClient();
+
+// Ensure data exists on app start
+store.ensureDataExists();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
