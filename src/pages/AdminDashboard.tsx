@@ -57,9 +57,19 @@ export default function AdminDashboard() {
   }, [navigate]);
 
   const loadData = () => {
-    setProducts(store.getProducts());
-    setOrders(store.getOrders());
-    setSocialMedia(store.getSocialMedia());
+    try {
+      // Ensure data exists before loading
+      store.ensureDataExists();
+      setProducts(store.getProducts());
+      setOrders(store.getOrders());
+      setSocialMedia(store.getSocialMedia());
+    } catch (error) {
+      console.error('Error loading data:', error);
+      // Fallback to empty arrays if there's an error
+      setProducts([]);
+      setOrders([]);
+      setSocialMedia([]);
+    }
   };
 
   const handleLogout = () => {
