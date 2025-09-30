@@ -37,7 +37,7 @@ export default function Contact() {
 
   const contactInfo = [
     {
-      icon: <Phone className="w-6 h-6 text-blue-600" />,
+      icon: <Phone className="w-6 h-6 text-black" />,
       title: 'Телефон',
       content: '+380 63 479 68 80'
     }
@@ -46,7 +46,7 @@ export default function Contact() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">{t('contactUs')}</h1>
+        <h1 className="text-4xl font-bold text-black mb-4">{t('contactUs')}</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           Маєте питання або пропозиції? Ми завжди раді допомогти! Зв'яжіться з нами будь-яким зручним способом.
         </p>
@@ -131,7 +131,7 @@ export default function Contact() {
                     {info.icon}
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                    <h3 className="text-lg font-semibold text-black mb-2">
                       {info.title}
                     </h3>
                     <p className="text-gray-600 whitespace-pre-line">

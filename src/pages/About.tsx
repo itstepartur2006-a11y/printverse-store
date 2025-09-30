@@ -8,22 +8,22 @@ export default function About() {
 
   const features = [
     {
-      icon: <Zap className="w-12 h-12 text-blue-600" />,
+      icon: <Zap className="w-12 h-12 text-black" />,
       title: 'Сучасні технології',
       description: 'Використовуємо найновіші 3D-принтери та високоякісні матеріали для створення унікальних брелків.'
     },
     {
-      icon: <Award className="w-12 h-12 text-blue-600" />,
+      icon: <Award className="w-12 h-12 text-black" />,
       title: 'Гарантія якості',
       description: 'Кожен брелок проходить ретельну перевірку якості перед відправкою клієнту.'
     },
     {
-      icon: <Users className="w-12 h-12 text-blue-600" />,
+      icon: <Users className="w-12 h-12 text-black" />,
       title: 'Досвідчена команда',
       description: 'Наша команда має багаторічний досвід у сфері 3D-друку та дизайну.'
     },
     {
-      icon: <Heart className="w-12 h-12 text-blue-600" />,
+      icon: <Heart className="w-12 h-12 text-black" />,
       title: 'Індивідуальний підхід',
       description: 'Ми створюємо персоналізовані брелки за вашими ескізами та побажаннями.'
     }
@@ -90,25 +90,25 @@ export default function About() {
       {/* Statistics */}
       <div className="grid md:grid-cols-4 gap-8 text-center">
         <div>
-          <div className="text-4xl font-bold text-blue-600 mb-2">1000+</div>
+          <div className="text-4xl font-bold text-black mb-2">1000+</div>
           <p className="text-gray-600">
             Задоволених клієнтів
           </p>
         </div>
         <div>
-          <div className="text-4xl font-bold text-blue-600 mb-2">5000+</div>
+          <div className="text-4xl font-bold text-black mb-2">5000+</div>
           <p className="text-gray-600">
             Виготовлених брелків
           </p>
         </div>
         <div>
-          <div className="text-4xl font-bold text-blue-600 mb-2">50+</div>
+          <div className="text-4xl font-bold text-black mb-2">50+</div>
           <p className="text-gray-600">
             Унікальних дизайнів
           </p>
         </div>
         <div>
-          <div className="text-4xl font-bold text-blue-600 mb-2">4.9</div>
+          <div className="text-4xl font-bold text-black mb-2">4.9</div>
           <p className="text-gray-600">
             Середня оцінка
           </p>

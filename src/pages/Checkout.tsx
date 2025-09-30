@@ -145,7 +145,7 @@ export default function Checkout() {
   if (cartItems.length === 0) {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">
+        <h1 className="text-2xl font-bold text-black mb-4">
           Кошик порожній
         </h1>
         <Button onClick={() => navigate('/catalog')}>
@@ -161,10 +161,10 @@ export default function Checkout() {
   }, 0);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-white py-8">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+          <h1 className="text-3xl font-bold text-black mb-8 text-center">
             {t('checkout')}
           </h1>
 
@@ -247,7 +247,7 @@ export default function Checkout() {
                     </div>
 
                     {customerInfo.isDifferentRecipient && (
-                      <div className="space-y-4 pl-6 border-l-2 border-gray-200">
+                      <div className="space-y-4 pl-6 border-l-2 border-black">
                         <div className="grid grid-cols-2 gap-4">
                           <div>
                             <Label htmlFor="recipientLastName">
@@ -316,8 +316,8 @@ export default function Checkout() {
                           </div>
                           
                           {deliveryInfo.method === 'nova_poshta' && (
-                            <div className="space-y-4 pl-6 border-l-2 border-blue-200">
-                              <div className="text-sm text-blue-600 font-medium mb-2">
+                            <div className="space-y-4 pl-6 border-l-2 border-black">
+                              <div className="text-sm text-black font-medium mb-2">
                                 Тільки по предоплаті 100%
                               </div>
                               <div className="text-sm text-gray-600 mb-2">
@@ -391,14 +391,14 @@ export default function Checkout() {
                           </div>
                           
                           {deliveryInfo.method === 'pickup' && (
-                            <div className="space-y-4 pl-6 border-l-2 border-green-200">
-                              <div className="text-sm text-green-600 font-medium mb-2">
+                            <div className="space-y-4 pl-6 border-l-2 border-black">
+                              <div className="text-sm text-black font-medium mb-2">
                                 Безкоштовний самовіз
                               </div>
-                              <div className="text-sm text-green-600 font-medium mb-2">
+                              <div className="text-sm text-black font-medium mb-2">
                                 Можна домовитися у Києві про зустріч
                               </div>
-                              <div className="text-sm text-green-600 font-medium mb-4">
+                              <div className="text-sm text-black font-medium mb-4">
                                 Можна оплатити готівкою
                               </div>
                               
@@ -525,7 +525,7 @@ export default function Checkout() {
                         </div>
                         <div className="flex justify-between">
                           <span>Доставка:</span>
-                          <span className={deliveryInfo.method === 'pickup' ? 'text-green-600' : 'text-blue-600'}>
+                          <span className={deliveryInfo.method === 'pickup' ? 'text-black' : 'text-black'}>
                             {deliveryInfo.method === 'pickup' 
                               ? 'Безкоштовно'
                               : 'За тарифами Нової Пошти'

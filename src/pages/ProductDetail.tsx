@@ -22,7 +22,7 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">
+        <h1 className="text-2xl font-bold text-black mb-4">
           {language === 'uk' ? 'Товар не знайдено' : 'Product not found'}
         </h1>
         <Link to="/catalog">
@@ -77,7 +77,7 @@ export default function ProductDetail() {
     <div className="container mx-auto px-4 py-8">
       {/* Breadcrumb */}
       <div className="mb-6">
-        <Link to="/catalog" className="flex items-center text-blue-600 hover:text-blue-800">
+        <Link to="/catalog" className="flex items-center text-black hover:text-gray-600">
           <ArrowLeft className="w-4 h-4 mr-2" />
           {language === 'uk' ? 'Повернутися до каталогу' : 'Back to Catalog'}
         </Link>
@@ -100,7 +100,7 @@ export default function ProductDetail() {
                   key={index}
                   onClick={() => setSelectedImage(index)}
                   className={`w-20 h-20 rounded-lg overflow-hidden border-2 ${
-                    selectedImage === index ? 'border-blue-500' : 'border-gray-200'
+                    selectedImage === index ? 'border-black' : 'border-black'
                   }`}
                 >
                   <img src={image || '/api/placeholder/300/300'} alt="" className="w-full h-full object-cover" />
@@ -114,7 +114,7 @@ export default function ProductDetail() {
         <div>
           <div className="flex flex-wrap gap-2 mb-4">
             {product.isNew && (
-              <Badge className="bg-green-500 text-white">
+              <Badge className="bg-black text-white">
                 {language === 'uk' ? 'Новинка' : 'New'}
               </Badge>
             )}
@@ -130,7 +130,7 @@ export default function ProductDetail() {
             )}
           </div>
 
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
+          <h1 className="text-3xl font-bold text-black mb-4">
             {product.name[language]}
           </h1>
 

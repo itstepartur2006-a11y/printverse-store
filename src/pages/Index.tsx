@@ -29,7 +29,7 @@ export default function Index() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-bold text-black mb-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
             {t('welcome')}
@@ -69,7 +69,7 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gray-100">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6 text-black">
             Готові замовити?

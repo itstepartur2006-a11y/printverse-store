@@ -42,17 +42,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             />
             <div className="absolute top-2 left-2 flex flex-col gap-1">
               {product.isNew && (
-                <Badge className="bg-green-500 text-white">
+                <Badge className="bg-black text-white">
                   {language === 'uk' ? 'Новинка' : 'New'}
                 </Badge>
               )}
               {product.isPromotion && (
-                <Badge className="bg-red-500 text-white">
+                <Badge className="bg-black text-white">
                   {language === 'uk' ? 'Акція' : 'Sale'}
                 </Badge>
               )}
               {product.isPopular && (
-                <Badge className="bg-yellow-500 text-white">
+                <Badge className="bg-black text-white">
                   {language === 'uk' ? 'Популярне' : 'Popular'}
                 </Badge>
               )}

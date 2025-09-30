@@ -40,7 +40,7 @@ export default function Cart() {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center py-16">
           <ShoppingCart className="w-24 h-24 text-gray-300 mx-auto mb-6" />
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">{t('cartEmpty')}</h1>
+          <h1 className="text-3xl font-bold text-black mb-4">{t('cartEmpty')}</h1>
           <p className="text-gray-600 mb-8">
             Додайте товари до кошика, щоб продовжити покупки
           </p>
@@ -56,7 +56,7 @@ export default function Cart() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8 flex items-center">
+      <h1 className="text-3xl font-bold text-black mb-8 flex items-center">
         <ShoppingCart className="w-8 h-8 mr-3" />
         {t('cart')} ({cartItems.reduce((sum, item) => sum + item.quantity, 0)})
       </h1>
@@ -77,14 +77,14 @@ export default function Cart() {
                   <div className="flex-1">
                     <Link 
                       to={`/product/${item.productId}`}
-                      className="text-lg font-semibold text-gray-800 hover:text-blue-600"
+                      className="text-lg font-semibold text-black text-black hover:text-gray-600"
                     >
                       {item.product!.name}
                     </Link>
                     <p className="text-gray-600 text-sm mt-1">
                       {item.product!.material} • {item.product!.color}
                     </p>
-                    <p className="text-blue-600 font-semibold mt-2">
+                    <p className="text-black font-semibold mt-2">
                       ₴{item.product!.price}
                     </p>
                   </div>
@@ -111,14 +111,14 @@ export default function Cart() {
                   </div>
 
                   <div className="text-right">
-                    <p className="text-lg font-bold text-gray-800">
+                    <p className="text-lg font-bold text-black">
                       ₴{item.product!.price * item.quantity}
                     </p>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleRemoveItem(item.productId)}
-                      className="text-red-600 hover:text-red-800 hover:bg-red-50 mt-2"
+                      className="text-black hover:text-gray-600 hover:bg-gray-50 mt-2"
                     >
                       <Trash2 className="w-4 h-4 mr-1" />
                       {t('remove')}

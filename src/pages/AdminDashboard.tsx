@@ -108,12 +108,12 @@ export default function AdminDashboard() {
   const statistics = store.getStatistics();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-800">{t('adminPanel')}</h1>
+            <h1 className="text-2xl font-bold text-black">{t('adminPanel')}</h1>
             <Button onClick={handleLogout} variant="outline">
               <LogOut className="w-4 h-4 mr-2" />
               {language === 'uk' ? 'Вийти' : 'Logout'}
@@ -290,7 +290,7 @@ export default function AdminDashboard() {
                           variant="outline"
                           size="sm"
                           onClick={() => handleDeleteProduct(product.id)}
-                          className="text-red-600 hover:text-red-800"
+                          className="text-black hover:text-gray-600"
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
@@ -321,7 +321,7 @@ export default function AdminDashboard() {
                         </p>
                         <p className="text-gray-600">{order.customerInfo.address}</p>
                         {order.customerInfo.isDifferentRecipient && order.customerInfo.recipientInfo && (
-                          <p className="text-sm text-blue-600 mt-1">
+                          <p className="text-sm text-black mt-1">
                             {language === 'uk' ? 'Отримувач' : 'Recipient'}: {order.customerInfo.recipientInfo.firstName} {order.customerInfo.recipientInfo.lastName} ({order.customerInfo.recipientInfo.phone})
                           </p>
                         )}
@@ -329,7 +329,7 @@ export default function AdminDashboard() {
                           <p className="font-medium">
                             {language === 'uk' ? 'Доставка' : 'Delivery'}: 
                             {order.delivery.method === 'nova_poshta' ? (
-                              <span className="text-blue-600">
+                              <span className="text-black">
                                 {language === 'uk' ? ' Нова Пошта' : ' Nova Poshta'} 
                                 ({language === 'uk' ? 
                                   order.delivery.novaPoshtaOption === 'branch' ? 'відділення' :
@@ -340,7 +340,7 @@ export default function AdminDashboard() {
                                 })
                               </span>
                             ) : (
-                              <span className="text-green-600">
+                              <span className="text-black">
                                 {language === 'uk' ? ' Самовіз' : ' Pickup'}
                               </span>
                             )}
@@ -356,7 +356,7 @@ export default function AdminDashboard() {
                             </p>
                           )}
                         </div>
-                        <p className="font-semibold text-blue-600 mt-2">
+                        <p className="font-semibold text-black mt-2">
                           {t('total')}: ₴{order.total}
                         </p>
                       </div>
@@ -452,7 +452,7 @@ export default function AdminDashboard() {
                             variant="outline"
                             size="sm"
                             onClick={() => handleDeleteSocialMedia(social.id)}
-                            className="text-red-600 hover:text-red-800"
+                            className="text-black hover:text-gray-600"
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>
@@ -555,7 +555,7 @@ export default function AdminDashboard() {
                   <CardTitle>Очистити дані</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-red-600 mb-4">
+                  <p className="text-black mb-4">
                     ⚠️ Увага! Це дія видалить всі дані і поверне до початкових налаштувань.
                   </p>
                   <Button 
