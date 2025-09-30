@@ -23,16 +23,38 @@ class Store {
     const data = localStorage.getItem(this.storageKey);
     if (!data) {
       // If no data exists, restore default data
-      this.restoreDefaultData();
-      return this.getData(); // Recursive call to get the restored data
+      const defaultData = {
+        products: mockProducts,
+        cart: [],
+        orders: [],
+        admin: { username: 'PrintVerse2025', password: 'Sviderskyi100' },
+        socialMedia: [
+          { id: '1', name: 'Facebook', url: 'https://facebook.com/printverse' },
+          { id: '2', name: 'Instagram', url: 'https://instagram.com/printverse' },
+          { id: '3', name: 'Telegram', url: 'https://t.me/printverse' }
+        ]
+      };
+      this.saveData(defaultData);
+      return defaultData;
     }
     
     const parsedData = JSON.parse(data);
     
     // Check if products array is empty and restore if needed
     if (!parsedData.products || parsedData.products.length === 0) {
-      this.restoreDefaultData();
-      return this.getData(); // Recursive call to get the restored data
+      const defaultData = {
+        products: mockProducts,
+        cart: parsedData.cart || [],
+        orders: parsedData.orders || [],
+        admin: parsedData.admin || { username: 'PrintVerse2025', password: 'Sviderskyi100' },
+        socialMedia: parsedData.socialMedia || [
+          { id: '1', name: 'Facebook', url: 'https://facebook.com/printverse' },
+          { id: '2', name: 'Instagram', url: 'https://instagram.com/printverse' },
+          { id: '3', name: 'Telegram', url: 'https://t.me/printverse' }
+        ]
+      };
+      this.saveData(defaultData);
+      return defaultData;
     }
     
     return parsedData;
@@ -153,10 +175,10 @@ class Store {
     if (data.products.length === 0) {
       const defaultData = {
         products: mockProducts,
-        cart: [],
-        orders: [],
-        admin: { username: 'PrintVerse2025', password: 'Sviderskyi100' },
-        socialMedia: [
+        cart: data.cart || [],
+        orders: data.orders || [],
+        admin: data.admin || { username: 'PrintVerse2025', password: 'Sviderskyi100' },
+        socialMedia: data.socialMedia || [
           { id: '1', name: 'Facebook', url: 'https://facebook.com/printverse' },
           { id: '2', name: 'Instagram', url: 'https://instagram.com/printverse' },
           { id: '3', name: 'Telegram', url: 'https://t.me/printverse' }
@@ -172,7 +194,8 @@ class Store {
   ensureDataExists() {
     const data = localStorage.getItem(this.storageKey);
     if (!data) {
-      this.restoreDefaultData();
+      // Just call getData() which will handle the restoration
+      this.getData();
     }
   }
 
