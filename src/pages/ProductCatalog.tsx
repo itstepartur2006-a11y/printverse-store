@@ -12,16 +12,6 @@ import { materials, colors } from '@/lib/mockData';
 
 export default function ProductCatalog() {
   const { t } = useLanguage();
-  
-  // Ensure data exists before getting products
-  React.useEffect(() => {
-    try {
-      store.ensureDataExists();
-    } catch (error) {
-      console.error('Error ensuring data exists:', error);
-    }
-  }, []);
-  
   const products = store.getProducts();
   
   const [searchQuery, setSearchQuery] = useState('');

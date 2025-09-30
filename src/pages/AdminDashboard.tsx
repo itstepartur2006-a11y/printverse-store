@@ -58,8 +58,6 @@ export default function AdminDashboard() {
 
   const loadData = () => {
     try {
-      // Ensure data exists before loading
-      store.ensureDataExists();
       setProducts(store.getProducts());
       setOrders(store.getOrders());
       setSocialMedia(store.getSocialMedia());

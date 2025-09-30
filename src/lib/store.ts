@@ -20,10 +20,37 @@ class Store {
 
   // Get data from localStorage
   private getData(): StoreData {
-    const data = localStorage.getItem(this.storageKey);
-    if (!data) {
-      // If no data exists, restore default data
-      const defaultData = {
+    try {
+      const data = localStorage.getItem(this.storageKey);
+      if (!data) {
+        // Return default data without saving to avoid recursion
+        return {
+          products: mockProducts,
+          cart: [],
+          orders: [],
+          admin: { username: 'PrintVerse2025', password: 'Sviderskyi100' },
+          socialMedia: [
+            { id: '1', name: 'Facebook', url: 'https://facebook.com/printverse' },
+            { id: '2', name: 'Instagram', url: 'https://instagram.com/printverse' },
+            { id: '3', name: 'Telegram', url: 'https://t.me/printverse' }
+          ]
+        };
+      }
+      
+      const parsedData = JSON.parse(data);
+      
+      // If products are missing or empty, add them but keep other data
+      if (!parsedData.products || parsedData.products.length === 0) {
+        parsedData.products = mockProducts;
+        // Save the updated data
+        localStorage.setItem(this.storageKey, JSON.stringify(parsedData));
+      }
+      
+      return parsedData;
+    } catch (error) {
+      console.error('Error getting data:', error);
+      // Return default data on error
+      return {
         products: mockProducts,
         cart: [],
         orders: [],
@@ -34,30 +61,7 @@ class Store {
           { id: '3', name: 'Telegram', url: 'https://t.me/printverse' }
         ]
       };
-      this.saveData(defaultData);
-      return defaultData;
     }
-    
-    const parsedData = JSON.parse(data);
-    
-    // Check if products array is empty and restore if needed
-    if (!parsedData.products || parsedData.products.length === 0) {
-      const defaultData = {
-        products: mockProducts,
-        cart: parsedData.cart || [],
-        orders: parsedData.orders || [],
-        admin: parsedData.admin || { username: 'PrintVerse2025', password: 'Sviderskyi100' },
-        socialMedia: parsedData.socialMedia || [
-          { id: '1', name: 'Facebook', url: 'https://facebook.com/printverse' },
-          { id: '2', name: 'Instagram', url: 'https://instagram.com/printverse' },
-          { id: '3', name: 'Telegram', url: 'https://t.me/printverse' }
-        ]
-      };
-      this.saveData(defaultData);
-      return defaultData;
-    }
-    
-    return parsedData;
   }
 
   // Save data to localStorage
@@ -192,10 +196,11 @@ class Store {
 
   // Check if data exists and restore if needed
   ensureDataExists() {
-    const data = localStorage.getItem(this.storageKey);
-    if (!data) {
-      // Just call getData() which will handle the restoration
+    try {
+      // Just call getData() which handles everything
       this.getData();
+    } catch (error) {
+      console.error('Error ensuring data exists:', error);
     }
   }
 
