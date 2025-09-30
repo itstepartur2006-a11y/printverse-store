@@ -25,7 +25,7 @@ class Store {
       products: mockProducts,
       cart: [],
       orders: [],
-      admin: { username: 'admin', password: 'AdminKeyChain2024!' },
+      admin: { username: 'PrintVerse2025', password: 'Sviderskyi100' },
       socialMedia: [
         { id: '1', name: 'Facebook', url: 'https://facebook.com/printverse' },
         { id: '2', name: 'Instagram', url: 'https://instagram.com/printverse' },
@@ -146,7 +146,7 @@ class Store {
   // Update admin credentials (for migration)
   updateAdminCredentials() {
     const data = this.getData();
-    data.admin = { username: 'admin', password: 'AdminKeyChain2024!' };
+    data.admin = { username: 'PrintVerse2025', password: 'Sviderskyi100' };
     this.saveData(data);
   }
 
