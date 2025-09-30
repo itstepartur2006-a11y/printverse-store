@@ -6,37 +6,17 @@ interface HiddenAdminAccessProps {
 }
 
 export const HiddenAdminAccess: React.FC<HiddenAdminAccessProps> = ({ children }) => {
-  const [keySequence, setKeySequence] = useState<string[]>([]);
   const [showAccess, setShowAccess] = useState(false);
   const navigate = useNavigate();
 
-  // Секретная комбинация клавиш: Ctrl + Shift + A + D + M + I + N
-  const secretSequence = ['Control', 'Shift', 'KeyA', 'KeyD', 'KeyM', 'KeyI', 'KeyN'];
-
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      setKeySequence(prev => {
-        const newSequence = [...prev, event.code];
-        
-        // Проверяем последние 7 нажатий
-        if (newSequence.length > 7) {
-          newSequence.shift();
-        }
-        
-        // Проверяем совпадение с секретной последовательностью
-        if (newSequence.length === 7) {
-          const isMatch = secretSequence.every((key, index) => 
-            newSequence[newSequence.length - 7 + index] === key
-          );
-          
-          if (isMatch) {
-            setShowAccess(true);
-            setTimeout(() => setShowAccess(false), 5000); // Скрыть через 5 секунд
-          }
-        }
-        
-        return newSequence;
-      });
+      // Проверяем комбинацию Ctrl + Shift + A
+      if (event.ctrlKey && event.shiftKey && event.code === 'KeyA') {
+        event.preventDefault();
+        setShowAccess(true);
+        setTimeout(() => setShowAccess(false), 5000); // Скрыть через 5 секунд
+      }
     };
 
     document.addEventListener('keydown', handleKeyDown);
